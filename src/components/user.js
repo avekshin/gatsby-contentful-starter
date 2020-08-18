@@ -1,0 +1,1 @@
+export const getUserId = () => Math.floor(Math.random() * Math.floor(5));

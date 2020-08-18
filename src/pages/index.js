@@ -23,7 +23,7 @@ class RootIndex extends React.Component {
               {posts.map(({ node }) => {
                 return (
                   <li key={node.slug}>
-                    <ArticlePreview article={node} />
+                    <ArticlePreview article={node} posts={posts}/>
                   </li>
                 )
               })}
@@ -47,6 +47,7 @@ export const pageQuery = graphql`
     allContentfulBlogPost(sort: { fields: [publishDate], order: DESC }) {
       edges {
         node {
+          contentful_id
           title
           slug
           publishDate(formatString: "MMMM Do, YYYY")
@@ -61,7 +62,13 @@ export const pageQuery = graphql`
               html
             }
           }
-          author { name }
+          subBlog { 
+            experimentKey
+            meta {
+              variation_1
+              variation_2
+            }
+          }
         }
       }
     }

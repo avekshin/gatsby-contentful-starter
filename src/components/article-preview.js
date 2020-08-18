@@ -3,8 +3,9 @@ import { Link } from 'gatsby'
 import Img from 'gatsby-image'
 
 import styles from './article-preview.module.css'
+import {getVariableContent} from './variation-provider.js'
 
-export default ({ article }) => (
+export default ({ article, posts }) => (
   <div className={styles.preview}>
     <Img alt="" fluid={article.heroImage.fluid} />
     <h3 className={styles.previewTitle}>
@@ -12,7 +13,8 @@ export default ({ article }) => (
     </h3>
     <small>{article.publishDate}</small>
     <br/>
-    <small>{article.author && article.author.name}</small>
+    <small>{article.subBlog && `PICKED BY OPTIMIZELY ${getVariableContent(posts, article.subBlog).node.title}`}</small>
+
     <div
       dangerouslySetInnerHTML={{
         __html: article.description.childMarkdownRemark.html,
